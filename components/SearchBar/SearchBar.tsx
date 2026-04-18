@@ -3,12 +3,13 @@ import { Field, Form, Formik, FormikState } from "formik";
 import { useRouter, useSearchParams } from "next/navigation";
 import css from "./SearchBar.module.css";
 import UniqButton from "../UniqButton/UniqButton";
+import { IoMapOutline } from "react-icons/io5";
 
 interface SearchBarValues {
   location: string;
-  forms: string;
-  engines: string;
-  transmissions: string;
+  form: string;
+  engine: string;
+  transmission: string;
 }
 
 function SearchBar() {
@@ -17,9 +18,9 @@ function SearchBar() {
 
   const initialValues: SearchBarValues = {
     location: searchParams.get("location") || "",
-    forms: searchParams.get("forms") || "",
-    engines: searchParams.get("engines") || "",
-    transmissions: searchParams.get("transmissions") || "",
+    form: searchParams.get("forms") || "",
+    engine: searchParams.get("engines") || "",
+    transmission: searchParams.get("transmissions") || "",
   };
 
   const handleSubmit = (values: SearchBarValues) => {
@@ -38,9 +39,9 @@ function SearchBar() {
     resetForm({
       values: {
         location: "",
-        forms: "",
-        engines: "",
-        transmissions: "",
+        form: "",
+        engine: "",
+        transmission: "",
       },
     });
     router.push("/catalog");
@@ -55,12 +56,15 @@ function SearchBar() {
               <div className={css.inputWrapper}>
                 <label className={css.label}>
                   Location
-                  <Field
-                    type="text"
-                    name="location"
-                    className={css.input}
-                    placeholder="City"
-                  />
+                  <div className={css.inputIconWrapper}>
+                    <IoMapOutline className={css.mapIcon} />
+                    <Field
+                      type="text"
+                      name="location"
+                      className={css.input}
+                      placeholder="City"
+                    />
+                  </div>
                 </label>
               </div>
 
@@ -71,24 +75,40 @@ function SearchBar() {
                   <h3 className={css.title}>Camper form</h3>
                   <div className={css.optionsList}>
                     <label className={css.radioLabel}>
-                      <Field type="radio" name="forms" value="alcove" />
+                      <Field
+                        className={css.radioInput}
+                        type="radio"
+                        name="form"
+                        value="alcove"
+                      />
                       Alcove
                     </label>
                     <label className={css.radioLabel}>
-                      <Field type="radio" name="forms" value="panel_van" />
+                      <Field
+                        className={css.radioInput}
+                        type="radio"
+                        name="form"
+                        value="panel_van"
+                      />
                       Panel Van
                     </label>
                     <label className={css.radioLabel}>
-                      <Field type="radio" name="forms" value="integrated" />
-                      Integrated
-                    </label>
-                    <label className={css.radioLabel}>
                       <Field
+                        className={css.radioInput}
                         type="radio"
-                        name="forms"
+                        name="form"
                         value="semi_integrated"
                       />
                       Semi Integrated
+                    </label>
+                    <label className={css.radioLabel}>
+                      <Field
+                        className={css.radioInput}
+                        type="radio"
+                        name="form"
+                        value="integrated"
+                      />
+                      Integrated
                     </label>
                   </div>
                 </div>
@@ -97,19 +117,39 @@ function SearchBar() {
                   <h3 className={css.title}>Engine</h3>
                   <div className={css.optionsList}>
                     <label className={css.radioLabel}>
-                      <Field type="radio" name="engines" value="diesel" />
+                      <Field
+                        className={css.radioInput}
+                        type="radio"
+                        name="engine"
+                        value="diesel"
+                      />
                       Diesel
                     </label>
                     <label className={css.radioLabel}>
-                      <Field type="radio" name="engines" value="petrol" />
+                      <Field
+                        className={css.radioInput}
+                        type="radio"
+                        name="engine"
+                        value="petrol"
+                      />
                       Petrol
                     </label>
                     <label className={css.radioLabel}>
-                      <Field type="radio" name="engines" value="hybrid" />
+                      <Field
+                        className={css.radioInput}
+                        type="radio"
+                        name="engine"
+                        value="hybrid"
+                      />
                       Hybrid
                     </label>
                     <label className={css.radioLabel}>
-                      <Field type="radio" name="engines" value="electric" />
+                      <Field
+                        className={css.radioInput}
+                        type="radio"
+                        name="engine"
+                        value="electric"
+                      />
                       Electric
                     </label>
                   </div>
@@ -120,14 +160,20 @@ function SearchBar() {
                   <div className={css.optionsList}>
                     <label className={css.radioLabel}>
                       <Field
+                        className={css.radioInput}
                         type="radio"
-                        name="transmissions"
+                        name="transmission"
                         value="automatic"
                       />
                       Automatic
                     </label>
                     <label className={css.radioLabel}>
-                      <Field type="radio" name="transmissions" value="manual" />
+                      <Field
+                        className={css.radioInput}
+                        type="radio"
+                        name="transmission"
+                        value="manual"
+                      />
                       Manual
                     </label>
                   </div>

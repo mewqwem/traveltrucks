@@ -1,0 +1,114 @@
+.truckWrapper {
+  display: flex;
+  gap: 24px;
+
+  margin-bottom: 88px;
+}
+.truckAbout {
+  max-width: 650px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.truckImageWrapper {
+  width: 638px;
+
+  flex-shrink: 0;
+}
+.truckName {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+
+  margin-bottom: 8px;
+}
+.truckSubHead {
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+
+  margin-bottom: 24px;
+}
+.truckLocation {
+  display: flex;
+  gap: 16px;
+}
+.truckPrice {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+}
+.truckDescription {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--text);
+}
+.detailsTitle {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+
+  margin-bottom: 16px;
+}
+.tagWrapper {
+  display: flex;
+  gap: 8px;
+
+  flex-wrap: wrap;
+}
+.tag {
+  display: flex;
+  align-items: center;
+
+  border-radius: 100px;
+  background-color: var(--badges);
+
+  padding: 12px 18px;
+
+  text-transform: capitalize;
+
+  gap: 8px;
+}
+.decorateLine {
+  border: none;
+  border-top: 1px solid var(--gray-light);
+  width: 100%;
+  margin: 16px 0;
+}
+.truckCharacteristicsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.truckCharacteristic {
+  display: flex;
+  justify-content: space-between;
+}
+.characteristicText {
+  color: var(--main);
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+}
+.truckContainer {
+  display: flex;
+  flex-direction: column;
+
+  padding: 24px;
+}
+.reviewsWrapper {
+  display: flex;
+
+  gap: 48px;
+}
+.reviewsTitle {
+  margin-bottom: 24px;
+}
+.star {
+  fill: var(--rating);
+}

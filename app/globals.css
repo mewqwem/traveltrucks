@@ -47,7 +47,7 @@ button {
 }
 
 .container {
-  max-width: 1312px;
+  max-width: 1440px;
   margin: 0 auto;
   box-sizing: border-box;
 
@@ -63,6 +63,13 @@ input {
   border: none;
   background-color: transparent;
 }
+.section {
+  padding: 64px;
+  margin: 0 auto;
+
+  max-width: 1440px;
+  width: 100%;
+}
 .catalogSection {
   display: flex;
   justify-content: center;
@@ -70,4 +77,23 @@ input {
   padding: 48px 64px;
   margin: 0 auto;
   gap: 65px;
+}
+.loadingBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(255, 255, 255, 0.6);
+
+  backdrop-filter: blur(4px);
+
+  z-index: 9999;
+
+  pointer-events: all;
 }

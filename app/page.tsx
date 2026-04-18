@@ -3,8 +3,8 @@ import css from "./page.module.css";
 
 export default function Home() {
   return (
-    <div className={css.page}>
-      <main className={css.main}>
+    <section className={css.page}>
+      <div className={css.main}>
         <section className={css.hero}>
           <div className={css.wrapper}>
             <div className={css.textContent}>
@@ -20,7 +20,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </main>
-    </div>
+      </div>
+    </section>
   );
 }

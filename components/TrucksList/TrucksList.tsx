@@ -10,6 +10,7 @@ import {
   TbManualGearboxFilled,
 } from "react-icons/tb";
 import { TailSpin } from "react-loader-spinner";
+import { formatFormText } from "@/utils/util";
 
 interface TrucksListProps {
   campers: CampersTruck[];
@@ -46,7 +47,13 @@ function TrucksList({
         {campers.map((truck) => (
           <li key={truck.id} className={css.listItem}>
             <div className={css.cardImage}>
-              <Image src={truck.coverImage} fill alt={truck.name}></Image>
+              <Image
+                src={truck.coverImage}
+                fill
+                alt={truck.name}
+                sizes="219"
+                loading="eager"
+              />
             </div>
             <div className={css.truckAbout}>
               <div className={css.truckHead}>
@@ -80,11 +87,13 @@ function TrucksList({
                 </div>
                 <div className={css.tag}>
                   <FaCarSide className={css.tagIcon} />
-                  {truck.form}
+                  {formatFormText(truck.form)}
                 </div>
               </div>
               <div className={css.btn}>
-                <UniqButton>Show more</UniqButton>
+                <UniqButton type="link" href={`/catalog/${truck.id}`}>
+                  Show more
+                </UniqButton>
               </div>
             </div>
           </li>
