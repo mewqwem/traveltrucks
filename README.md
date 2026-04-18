@@ -1,37 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TravelTrucks 🚐
 
-## Getting Started
+TravelTrucks is a web platform designed to help you find and book your dream camper.
 
-First, run the development server:
+Designed for travelers who value freedom of movement without sacrificing comfort, TravelTrucks allows users to browse a full catalog of campers, filter by specifications, and request a reservation.
+## Features
+- Camper Catalog: Browse a list of available vehicles with smooth pagination via the "Load More" button.
+
+- Detailed View: Individual pages for each camper featuring a photo gallery, detailed description, user reviews, and technical specifications.
+
+- Dynamic Filtering: Advanced search functionality by location, body type (Alcove, Integrated, Panel Van, etc.), engine type, and transmission.
+
+- Booking System: Interactive booking form with real-time validation (Formik + Yup) and instant feedback via toast notifications (React Hot Toast).
+
+- SEO Optimized: Dynamic metadata and Open Graph support for better social media sharing and search engine visibility.
+
+## Tech Stack
+
+**Framework**: Next.js 14+ (App Router)
+
+**Language**: TypeScript
+
+**State Management / Forms**: Formik & Yup
+
+**Styling**: CSS Modules
+
+**API Client**: Axios
+
+**UI Components**: React Icons, React Loader Spinner, React Hot Toast
+## Installation & Setup
+
+Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+    git clone https://github.com/your-username/travel-trucks.git
+    cd travel-trucks
+```
+```bash
+    npm run dev
+```
+## Build & Deployment
+
+To create a production-ready build:
+
+```bash
+  npm run deploy
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Author
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Oleh
 
-## Learn More
+Student & Full-stack Developer.
 
-To learn more about Next.js, take a look at the following resources:
+- [@mewqwem](https://github.com/mewqwem)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Home Page
+<img width="2557" height="1283" alt="image" src="https://github.com/user-attachments/assets/2c09b36f-732f-4a55-8030-cc64e0da956a" />
+Catalog Page
+<img width="1343" height="1278" alt="image" src="https://github.com/user-attachments/assets/524f373a-0755-41c5-b02a-7dbee16f54c7" />
+Camper details Page
+<img width="1343" height="1335" alt="image" src="https://github.com/user-attachments/assets/035720b9-e261-42ea-ad72-4133d5035f4c" />
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-<img width="2557" height="1283" alt="image" src="https://github.com/user-attachments/assets/e9877c51-6816-45da-9e9c-43ce83ab54b8" />
