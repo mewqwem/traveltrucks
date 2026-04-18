@@ -18,9 +18,9 @@ function SearchBar() {
 
   const initialValues: SearchBarValues = {
     location: searchParams.get("location") || "",
-    form: searchParams.get("forms") || "",
-    engine: searchParams.get("engines") || "",
-    transmission: searchParams.get("transmissions") || "",
+    form: searchParams.get("form") || "",
+    engine: searchParams.get("engine") || "",
+    transmission: searchParams.get("transmission") || "",
   };
 
   const handleSubmit = (values: SearchBarValues) => {
@@ -49,7 +49,11 @@ function SearchBar() {
 
   return (
     <aside className={css.form}>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        enableReinitialize={true}
+      >
         {({ resetForm }) => (
           <Form>
             <div className={css.formWrapper}>

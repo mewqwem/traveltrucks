@@ -1,5 +1,5 @@
 "use client";
-import { Field, Form, Formik, FormikHelpers } from "formik";
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import UniqButton from "../UniqButton/UniqButton";
 import css from "./ReviewForm.module.css";
 import * as Yup from "yup";
@@ -51,11 +51,21 @@ function ReviewForm({ onSubmit, isLoading }: ReviewFormProps) {
         <Form className={css.form}>
           <div className={css.inputWrappers}>
             <Field name="name" className={css.input} placeholder="Name*" />
+            <ErrorMessage
+              name="name"
+              component={"span"}
+              className={css.error}
+            />
             <Field
               type="email"
               name="email"
               className={css.input}
               placeholder="Email*"
+            />
+            <ErrorMessage
+              name="email"
+              component={"span"}
+              className={css.error}
             />
           </div>
           <UniqButton type="submit">

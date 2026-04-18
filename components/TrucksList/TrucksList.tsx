@@ -11,6 +11,7 @@ import {
 } from "react-icons/tb";
 import { TailSpin } from "react-loader-spinner";
 import { formatFormText } from "@/utils/util";
+import toast from "react-hot-toast";
 
 interface TrucksListProps {
   campers: CampersTruck[];
@@ -39,6 +40,15 @@ function TrucksList({
         wrapperStyle={{}}
         wrapperClass=""
       />
+    );
+  }
+  if (campers.length === 0) {
+    return (
+      <section>
+        <ul className={css.list}>
+          <div>Not found</div>
+        </ul>
+      </section>
     );
   }
   return (
@@ -91,7 +101,12 @@ function TrucksList({
                 </div>
               </div>
               <div className={css.btn}>
-                <UniqButton type="link" href={`/catalog/${truck.id}`}>
+                <UniqButton
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  type="link"
+                  href={`/catalog/${truck.id}`}
+                >
                   Show more
                 </UniqButton>
               </div>

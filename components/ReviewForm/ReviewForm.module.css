@@ -48,3 +48,7 @@
 .loader {
   justify-content: center;
 }
+.error {
+  color: red;
+  font-size: 12px;
+}
