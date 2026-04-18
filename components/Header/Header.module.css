@@ -1,0 +1,39 @@
+.header {
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid #f2f4f7;
+}
+.wrapper {
+  display: flex;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  align-items: center;
+  position: relative;
+}
+.navList {
+  display: flex;
+  gap: 32px;
+}
+.logo {
+  padding: 24px;
+  padding-left: 64px;
+}
+.navLink {
+  display: inline-block;
+  padding: 24px;
+  line-height: 150%;
+
+  color: var(--main);
+}
+.logo {
+  margin-right: auto;
+}
+.navWrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.active {
+  color: var(--grey-green);
+}

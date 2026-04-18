@@ -1,0 +1,39 @@
+.hero {
+  width: 100%;
+  height: calc(100vh - 69px);
+  display: flex;
+  align-items: center;
+
+  background-image: url("/Hero@1x.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 64px;
+  gap: 40px;
+}
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.title {
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 67%;
+
+  color: var(--inputs-color);
+}
+.text {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+  color: var(--inputs-color);
+}
+.buttonWrapper {
+  width: 173px;
+}

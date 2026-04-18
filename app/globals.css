@@ -1,0 +1,73 @@
+:root {
+  --grey-green: #829b91;
+  --green-hover: #6d7b75;
+  --badges: #f2f4f7;
+  --inputs-color: #f7f7f7;
+  --rating: #ffc531;
+  --white: #ffffff;
+  --text: #475467;
+  --main: #101828;
+  --gray-light: #dadde1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  font-size: 16px;
+  color: var(--main);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+ul,
+ol {
+  list-style: none;
+}
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.container {
+  max-width: 1312px;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  padding: 64px;
+}
+
+.main {
+  flex-grow: 1;
+  display: flex;
+}
+input {
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+.catalogSection {
+  display: flex;
+  justify-content: center;
+
+  padding: 48px 64px;
+  margin: 0 auto;
+  gap: 65px;
+}
