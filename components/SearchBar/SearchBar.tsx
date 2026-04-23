@@ -1,6 +1,7 @@
 "use client";
 import { Field, Form, Formik, FormikState } from "formik";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTransition } from "react";
 import css from "./SearchBar.module.css";
 import UniqButton from "../UniqButton/UniqButton";
 import { IoMapOutline } from "react-icons/io5";
@@ -15,6 +16,7 @@ interface SearchBarValues {
 function SearchBar() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [isPending, startTransition] = useTransition();
 
   const initialValues: SearchBarValues = {
     location: searchParams.get("location") || "",
@@ -30,7 +32,9 @@ function SearchBar() {
       if (value) params.set(key, value as string);
     });
 
-    router.push(`/catalog?${params.toString()}`);
+    startTransition(() => {
+      router.push(`/catalog?${params.toString()}`);
+    });
   };
 
   const handleClear = (
@@ -44,7 +48,9 @@ function SearchBar() {
         transmission: "",
       },
     });
-    router.push("/catalog");
+    startTransition(() => {
+      router.push("/catalog");
+    });
   };
 
   return (
@@ -185,11 +191,14 @@ function SearchBar() {
               </div>
 
               <div className={css.buttonWrapper}>
-                <UniqButton type="submit">Search</UniqButton>
+                <UniqButton type="submit" disabled={isPending}>
+                  {isPending ? "Loading..." : "Search"}
+                </UniqButton>
                 <button
                   className={css.clearButton}
                   type="button"
                   onClick={() => handleClear(resetForm)}
+                  disabled={isPending}
                 >
                   Clear filters
                 </button>
