@@ -51,3 +51,6 @@
 
   overflow: hidden;
 }
+.thumbnailButton {
+  background-color: transparent;
+}

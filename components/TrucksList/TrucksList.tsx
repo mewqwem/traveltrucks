@@ -73,7 +73,7 @@ function TrucksList({
                     <FaStar className={css.star} />
                     {truck.rating} ({truck.totalReviews})
                   </p>
-                  <p>
+                  <p className="locationText">
                     <IoMapOutline />
                     {truck.location}
                   </p>

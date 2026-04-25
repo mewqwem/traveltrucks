@@ -104,3 +104,10 @@ input {
 .loader {
   justify-content: center;
 }
+.locationText {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  gap: 4px;
+}

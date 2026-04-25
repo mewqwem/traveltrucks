@@ -24,7 +24,7 @@ export interface ReviewFormValues {
 }
 const schemaValidation = Yup.object().shape({
   name: Yup.string()
-    .min(3, "Name must be at least 2 characters")
+    .min(3, "Name must be at least 3 characters")
     .max(50, "Name must be maximum 50 characters")
     .required("Name is required"),
   email: Yup.string()
@@ -50,17 +50,25 @@ function ReviewForm({ onSubmit, isLoading }: ReviewFormProps) {
       >
         <Form className={css.form}>
           <div className={css.inputWrappers}>
-            <Field name="name" className={css.input} placeholder="Name*" />
+            <label htmlFor="name">Name *</label>
+            <Field
+              id="name"
+              name="name"
+              className={css.input}
+              placeholder="Name"
+            />
             <ErrorMessage
               name="name"
               component={"span"}
               className={css.error}
             />
+            <label htmlFor="email">Email *</label>
             <Field
+              id="email"
               type="email"
               name="email"
               className={css.input}
-              placeholder="Email*"
+              placeholder="Email"
             />
             <ErrorMessage
               name="email"

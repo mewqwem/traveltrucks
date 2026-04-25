@@ -10,7 +10,7 @@ function Header() {
   return (
     <header className={css.header}>
       <div className={css.wrapper}>
-        <Link href="/" className={css.logo}>
+        <Link href="/" className={css.logo} aria-label="Logo">
           <svg width="136" height="15">
             <use href="/TravelTrucks.svg"></use>
           </svg>

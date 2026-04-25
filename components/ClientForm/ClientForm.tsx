@@ -27,9 +27,9 @@ function ClientForm() {
     } catch (error) {
       console.error("Error:", error);
       toast.error("Somethings went wrong.");
+    } finally {
       setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return <ReviewForm onSubmit={handleSubmit} isLoading={isLoading} />;

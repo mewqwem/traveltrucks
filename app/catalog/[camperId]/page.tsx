@@ -1,5 +1,6 @@
 import { getCamperById, getCamperReviews } from "@/lib/api";
 import { notFound } from "next/navigation";
+import axios from "axios";
 import css from "./page.module.css";
 import { FaStar } from "react-icons/fa";
 import { IoMapOutline } from "react-icons/io5";
@@ -9,26 +10,31 @@ import Reviews from "@/components/Reviews/Reviews";
 import ClientForm from "@/components/ClientForm/ClientForm";
 
 export async function generateMetadata({ params }: PageProps) {
-  const { camperId } = await params;
-  const camper = await getCamperById(camperId);
+  try {
+    const { camperId } = await params;
+    const camper = await getCamperById(camperId);
 
-  if (!camper) return { title: "Camper Not Found" };
+    if (!camper) return { title: "Camper Not Found" };
 
-  return {
-    title: `${camper.name} - TravelTrucks`,
-    description: camper.description.slice(0, 160),
-    openGraph: {
-      title: camper.name,
-      description: camper.description,
-      images: [
-        {
-          url: camper.gallery[0]?.original,
-          width: 1200,
-          height: 630,
-        },
-      ],
-    },
-  };
+    return {
+      title: `${camper.name} - TravelTrucks`,
+      description: camper.description.slice(0, 160),
+      openGraph: {
+        title: camper.name,
+        description: camper.description,
+        images: [
+          {
+            url: camper.gallery[0]?.original,
+            width: 1200,
+            height: 630,
+          },
+        ],
+      },
+    };
+  } catch (error) {
+    console.error("Failed to generate metadata:", error);
+    return { title: "Error Loading Camper" };
+  }
 }
 
 interface PageProps {
@@ -66,7 +72,7 @@ async function page({ params }: PageProps) {
                     <FaStar className={css.star} />
                     {camper.rating} ({camper.totalReviews})
                   </p>
-                  <p>
+                  <p className="locationText">
                     <IoMapOutline />
                     {camper.location}
                   </p>
@@ -117,7 +123,14 @@ async function page({ params }: PageProps) {
     );
   } catch (error) {
     console.error("API Error:", error);
-    notFound();
+
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        notFound();
+      }
+    }
+
+    throw error;
   }
 }
 

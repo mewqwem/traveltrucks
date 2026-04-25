@@ -12,7 +12,11 @@ interface ImageGalleryProps {
 const Gallery = ({ images }: ImageGalleryProps) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const mainImage = images[selectedIndex]?.original;
+  const mainImage = images[selectedIndex]?.original || images[0]?.original;
+
+  if (!mainImage) {
+    return <div className={css.galleryWrapper}>No images available</div>;
+  }
 
   return (
     <div className={css.galleryWrapper}>
