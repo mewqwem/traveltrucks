@@ -1,6 +1,7 @@
 "use client";
 import { Field, Form, Formik, FormikState } from "formik";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import css from "./SearchBar.module.css";
 import UniqButton from "../UniqButton/UniqButton";
 import { IoMapOutline } from "react-icons/io5";
@@ -12,10 +13,9 @@ interface SearchBarValues {
   transmission: string;
 }
 
-function SearchBar() {
+function SearchBarContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const pathname = usePathname();
 
   const initialValues: SearchBarValues = {
     location: searchParams.get("location") || "",
@@ -35,7 +35,8 @@ function SearchBar() {
       }
     });
 
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    router.push(`/catalog?${params.toString()}`, { scroll: false });
+    router.refresh();
   };
 
   const handleClear = (
@@ -50,7 +51,8 @@ function SearchBar() {
       },
     });
 
-    router.push(pathname, { scroll: false });
+    router.push("/catalog");
+    router.refresh();
   };
 
   return (
@@ -191,7 +193,6 @@ function SearchBar() {
               </div>
 
               <div className={css.buttonWrapper}>
-                {/* Use Formik's isSubmitting state instead of React's useTransition */}
                 <UniqButton type="submit" disabled={isSubmitting}>
                   {isSubmitting ? "Loading..." : "Search"}
                 </UniqButton>
@@ -209,6 +210,14 @@ function SearchBar() {
         )}
       </Formik>
     </aside>
+  );
+}
+
+function SearchBar() {
+  return (
+    <Suspense fallback={<div>Loading form...</div>}>
+      <SearchBarContent />
+    </Suspense>
   );
 }
 
