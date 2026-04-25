@@ -11,7 +11,6 @@ import {
 } from "react-icons/tb";
 import { TailSpin } from "react-loader-spinner";
 import { formatFormText } from "@/utils/util";
-import toast from "react-hot-toast";
 
 interface TrucksListProps {
   campers: CampersTruck[];
@@ -115,21 +114,28 @@ function TrucksList({
         ))}
       </ul>
       {hasNextPage && (
-        <UniqButton onClick={fetchNextPage} disabled={isFetchingNextPage}>
-          {isFetchingNextPage ? (
-            <TailSpin
-              visible={true}
-              height="20"
-              width="20"
-              color="#fff"
-              ariaLabel="tail-spin-loading"
-              radius="1"
-              wrapperClass={css.loader}
-            />
-          ) : (
-            "Load More"
-          )}
-        </UniqButton>
+        <div className={css.btnWrapper}>
+          <button
+            onClick={fetchNextPage}
+            disabled={isFetchingNextPage}
+            className={css.loadButton}
+            type="button"
+          >
+            {isFetchingNextPage ? (
+              <TailSpin
+                visible={true}
+                height="20"
+                width="20"
+                color="#000"
+                ariaLabel="tail-spin-loading"
+                radius="1"
+                wrapperClass="loader"
+              />
+            ) : (
+              "Load More"
+            )}
+          </button>
+        </div>
       )}
     </section>
   );

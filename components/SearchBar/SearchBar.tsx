@@ -1,10 +1,16 @@
 "use client";
 import { Field, Form, Formik, FormikState } from "formik";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useTransition } from "react";
 import css from "./SearchBar.module.css";
 import UniqButton from "../UniqButton/UniqButton";
 import { IoMapOutline } from "react-icons/io5";
+import { MdClose } from "react-icons/md";
+import { TailSpin } from "react-loader-spinner";
+
+const isFormEmpty = (values: SearchBarValues) => {
+  return Object.values(values).every((value) => value === "");
+};
 
 interface SearchBarValues {
   location: string;
@@ -16,6 +22,7 @@ interface SearchBarValues {
 function SearchBarContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [isPending, startTransition] = useTransition();
 
   const initialValues: SearchBarValues = {
     location: searchParams.get("location") || "",
@@ -36,23 +43,24 @@ function SearchBarContent() {
     });
 
     router.push(`/catalog?${params.toString()}`, { scroll: false });
-    router.refresh();
   };
 
   const handleClear = (
     resetForm: (nextState?: Partial<FormikState<SearchBarValues>>) => void,
   ) => {
-    resetForm({
-      values: {
-        location: "",
-        form: "",
-        engine: "",
-        transmission: "",
-      },
-    });
+    startTransition(() => {
+      resetForm({
+        values: {
+          location: "",
+          form: "",
+          engine: "",
+          transmission: "",
+        },
+      });
 
-    router.push("/catalog");
-    router.refresh();
+      router.push("/catalog");
+      router.refresh();
+    });
   };
 
   return (
@@ -62,7 +70,7 @@ function SearchBarContent() {
         onSubmit={handleSubmit}
         enableReinitialize={true}
       >
-        {({ resetForm, isSubmitting }) => (
+        {({ resetForm, isSubmitting, dirty, values }) => (
           <Form>
             <div className={css.formWrapper}>
               <div className={css.inputWrapper}>
@@ -193,16 +201,47 @@ function SearchBarContent() {
               </div>
 
               <div className={css.buttonWrapper}>
-                <UniqButton type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? "Loading..." : "Search"}
+                <UniqButton
+                  type="submit"
+                  disabled={!dirty || isSubmitting || isPending}
+                >
+                  {isSubmitting ? (
+                    <TailSpin
+                      visible={true}
+                      height="20"
+                      width="20"
+                      color="#fff"
+                      ariaLabel="tail-spin-loading"
+                      radius="1"
+                      wrapperClass="loader"
+                    />
+                  ) : (
+                    "Search"
+                  )}
                 </UniqButton>
+
                 <button
                   className={css.clearButton}
                   type="button"
                   onClick={() => handleClear(resetForm)}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || isFormEmpty(values)}
                 >
-                  Clear filters
+                  {isPending ? (
+                    <TailSpin
+                      visible={true}
+                      height="20"
+                      width="20"
+                      color="#000"
+                      ariaLabel="tail-spin-loading"
+                      radius="1"
+                      wrapperClass="loader"
+                    />
+                  ) : (
+                    <>
+                      <MdClose className={css.closeIcon} />
+                      Clear filters
+                    </>
+                  )}
                 </button>
               </div>
             </div>
