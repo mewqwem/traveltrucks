@@ -1,7 +1,6 @@
 "use client";
 import { Field, Form, Formik, FormikState } from "formik";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useTransition } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import css from "./SearchBar.module.css";
 import UniqButton from "../UniqButton/UniqButton";
 import { IoMapOutline } from "react-icons/io5";
@@ -16,7 +15,7 @@ interface SearchBarValues {
 function SearchBar() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isPending, startTransition] = useTransition();
+  const pathname = usePathname();
 
   const initialValues: SearchBarValues = {
     location: searchParams.get("location") || "",
@@ -26,15 +25,17 @@ function SearchBar() {
   };
 
   const handleSubmit = (values: SearchBarValues) => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams.toString());
 
     Object.entries(values).forEach(([key, value]) => {
-      if (value) params.set(key, value as string);
+      if (value) {
+        params.set(key, value as string);
+      } else {
+        params.delete(key);
+      }
     });
 
-    startTransition(() => {
-      router.push(`/catalog?${params.toString()}`);
-    });
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   const handleClear = (
@@ -48,9 +49,8 @@ function SearchBar() {
         transmission: "",
       },
     });
-    startTransition(() => {
-      router.push("/catalog");
-    });
+
+    router.push(pathname, { scroll: false });
   };
 
   return (
@@ -60,7 +60,7 @@ function SearchBar() {
         onSubmit={handleSubmit}
         enableReinitialize={true}
       >
-        {({ resetForm }) => (
+        {({ resetForm, isSubmitting }) => (
           <Form>
             <div className={css.formWrapper}>
               <div className={css.inputWrapper}>
@@ -191,14 +191,15 @@ function SearchBar() {
               </div>
 
               <div className={css.buttonWrapper}>
-                <UniqButton type="submit" disabled={isPending}>
-                  {isPending ? "Loading..." : "Search"}
+                {/* Use Formik's isSubmitting state instead of React's useTransition */}
+                <UniqButton type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? "Loading..." : "Search"}
                 </UniqButton>
                 <button
                   className={css.clearButton}
                   type="button"
                   onClick={() => handleClear(resetForm)}
-                  disabled={isPending}
+                  disabled={isSubmitting}
                 >
                   Clear filters
                 </button>
